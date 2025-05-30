@@ -1,0 +1,145 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: 
+  m_GroupName: Default Local Group
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 0fd93a0ce3917bd4db1b23de0c97e2d0
+  m_SerializeEntries:
+  - m_GUID: 047a206c4c66eea49ba998af9f94202d
+    m_Address: Assets/_EchoAddressable/UI/LobbyUI.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: cde7483a774da1b46a176568303e9714
+    m_Address: Assets/_EchoAddressable/UI/RoomUI.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 5b9ddbe65e4207c48ae93213f357a53b
+    m_Address: Assets/_EchoAddressable/DataSo/SkillData_1001.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 490e915836fbf254e9c230a2d786ae8f
+    m_Address: Assets/_EchoAddressable/DataSo/BuffDataSo_1001.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e92c8b78b16f5e24088e6e0b415e0d5b
+    m_Address: Assets/_EchoAddressable/UI/BattleUI.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: d682b0e5347963e4bb9478626cf8049b
+    m_Address: Assets/_EchoAddressable/Prefabs/Skill/Skill_2001.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 99ab26646499940458b0aec3af14c9fb
+    m_Address: Assets/_EchoAddressable/DataSo/SkillData_2001.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c1933feddb948734da66f23a9c2b1a39
+    m_Address: Assets/_EchoAddressable/UI/FailUI.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 43cc89ac3c009d544aaaf845adee217f
+    m_Address: Assets/_EchoAddressable/UI/WinUI.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 0cd2afe0429c1844488cd6529c637a25
+    m_Address: Assets/_EchoAddressable/DataSo/ShopItemDataSo_1001.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6e1b4040434104e4cbb59e99b3f2546c
+    m_Address: Assets/_EchoAddressable/DataSo/ShopItemDataSo_1002.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 0739ac8ac6329104eaa0f3d613b788bd
+    m_Address: Assets/_EchoAddressable/DataSo/BuffDataSo_1003.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: d5be7c65890865340be7844fd82a926e
+    m_Address: Assets/_EchoAddressable/DataSo/BuffDataSo_1002.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e9f1c07724831494bacdeeefa9d0b910
+    m_Address: Assets/_EchoAddressable/DataSo/AchievementDataSo_1002.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: cfafd421a250fd44e92112e25585c917
+    m_Address: Assets/_EchoAddressable/DataSo/AchievementDataSo_1001.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6d5b8952690d7c54fbb365031b89315f
+    m_Address: Assets/_EchoAddressable/UI/AchievementUI.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a893073eb9754ca4f9be8c64b70231af
+    m_Address: Assets/_EchoAddressable/DataSo/BuffDataSo_1005.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 80c5dcfa2cc84744c871ad3ceb869105
+    m_Address: Assets/_EchoAddressable/DataSo/BuffDataSo_1004.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 49bcb3c297e78414ea600cb29caaca9b
+    m_Address: Assets/_EchoAddressable/DataSo/AchievementDataSo_1003.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 66e3526add885574084436207d269cb0
+    m_Address: Assets/_EchoAddressable/DataSo/BuffDataSo_1006.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c24a032223e4415469556445edca0514
+    m_Address: Assets/_EchoAddressable/DataSo/Reward DataSo_1001.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: bf22877f5e9d00c4ba158d10c7c133d6
+    m_Address: Assets/_EchoAddressable/DataSo/Reward DataSo_1003.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 25e54df67759fea4d9c5edbe0b9bb58b
+    m_Address: Assets/_EchoAddressable/DataSo/Reward DataSo_1002.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e7cc70621ad245d43b8ac8e11763138a
+    m_Address: Assets/_EchoAddressable/DataSo/ItemDataSo_1001.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 323787a144b55a64a9ebd94f0017781b
+    m_Address: Assets/_EchoAddressable/DataSo/ItemDataSo_1002.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e7c3f6211c3b9c847a38af37012b512c
+    m_Address: Assets/_EchoAddressable/DataSo/ItemDataSo_1003.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 7c389c7bb8cd22e4daa0905ad5a6978a
+    m_Address: Assets/_EchoAddressable/UI/LevelRewardUI.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ba38f97ad41f2ad439d193cda6249e9b
+    m_Address: Assets/_EchoAddressable/DataSo/BuffDataSo_1009.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6f0eec4d0a3a3454a9b27aa7cdf9c8c8
+    m_Address: Assets/_EchoAddressable/DataSo/BuffDataSo_1008.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 1df38c2140e9997448be020e7234bbfd
+    m_Address: Assets/_EchoAddressable/DataSo/BuffDataSo_1007.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: d1d217cdf5932f7408946111ba4998c7, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: ec86ee5b69e0993408f7151e3bb43feb, type: 2}
+    - {fileID: 11400000, guid: 324826e65663cbc4287fb22a3c647dc4, type: 2}
