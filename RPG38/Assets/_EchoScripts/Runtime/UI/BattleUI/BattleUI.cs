@@ -10,6 +10,10 @@ namespace GameLogic.Runtime
     {
         public TMP_Text nameText;
         public TMP_Text goldText;
+        public TMP_Text hpText;
+        public TMP_Text mpText;
+        public TMP_Text atkText;
+         public TMP_Text speedText;
         public Image hpBar;
         public Image  mpBar;
         public Button shopBtn;
@@ -31,11 +35,16 @@ namespace GameLogic.Runtime
             });
         }
 
-        public void RefreshUI(float currentHealth,float maxHealth,float currentMp,float maxMp,int goldNumber)
+        public void RefreshUI(float currentHealth,float maxHealth,float currentMp,float maxMp,int goldNumber,float atk,float speed)
         {
             hpBar.fillAmount = currentHealth / maxHealth;
             mpBar.fillAmount = currentMp / maxMp;
+            
             goldText.text = "money:"+goldNumber.ToString();
+            hpText.text = currentHealth.ToString() + "/" + maxHealth.ToString();
+            mpText.text = currentMp.ToString() + "/" + maxMp.ToString();
+            atkText.text = "atk:"+atk.ToString();
+            speedText.text = "speed:"+speed.ToString();
             nameText.text = GameHub.Interface.GetModel<UserModel>().userName;
         }
 

@@ -19,6 +19,7 @@ namespace GameLogic.Runtime
         protected override void OnServerUpdate()
         {
             base.OnServerUpdate();
+            _target.aniCtrl.SetBool(MoveHash, true);
 
             // —— 空中流转 —— 
             if (!_target.IsGround)

@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using JKFrame;
 using Mirror;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace GameLogic.Runtime.Level
 {
@@ -11,12 +13,16 @@ namespace GameLogic.Runtime.Level
         public string nextSceneName;
         public List<ShopItemDataSo> shopItems;
         public List<RewardDataSo> rewards;
+        public float InflationRate =0.2f;
+        public int E = 3;
         
         private int playerDieCount;
 
         public override void OnStartServer()
         {
             base.OnStartServer();
+            Application.targetFrameRate = 60;
+            
             EchoNetPlayerCtrl.OnDeath += EchoNetPlayerCtrlOnOnDeath;
             NetworkServer.RegisterHandler<LevelReadyMessage>(OnLevelReadyMessage);
         }
@@ -45,10 +51,21 @@ namespace GameLogic.Runtime.Level
                 if (battleUI != null)
                 {
                     var r1 = Random.Range(0, shopItems.Count);
-                    var data1 = shopItems[r1];
+                    var id1 = shopItems[r1].shopItemId;
+
+                var data1 = shopItems[r1];
+                    
+                    
                     shopItems.RemoveAt(r1);
                     var r2 = Random.Range(0, shopItems.Count);
                     var data2 = shopItems[r2];
+                    
+                    //var dataSo1 = ResSystem.LoadAsset<ShopItemDataSo>($"Assets/_EchoAddressable/DataSo/ShopItemDataSo_{id1}.asset");
+                    data1.goldCost = (int)(data1.cost * Math.Pow((1 + InflationRate), GameGlobalData.levelNumber) *
+                                           Math.Pow((10 + data1.demand) / 10, E));
+                    data2.goldCost = (int)(data2.cost * Math.Pow((1 + InflationRate), GameGlobalData.levelNumber) *
+                                           Math.Pow((10 + data2.demand) / 10, E));
+
                     battleUI.InjectShopItemData(data1, data2);
                 }
             }
@@ -112,7 +129,30 @@ namespace GameLogic.Runtime.Level
         public void RpcShowLevelRewardUI()
         {
             var window = UISystem.Show<LevelRewardUI>();
-            window.InitRewardItem(rewards[0],rewards[1],rewards[2]);
+
+            // 确保 rewards 列表中至少有 3 项
+            if (rewards.Count < 3)
+            {
+                Debug.LogWarning("rewards 数量不足 3，无法抽取三项奖励");
+                return;
+            }
+
+            // 随机抽三项，不重复
+            int r1 = Random.Range(0, rewards.Count);
+            var item1 = rewards[r1];
+            rewards.RemoveAt(r1);
+
+            int r2 = Random.Range(0, rewards.Count);
+            var item2 = rewards[r2];
+            rewards.RemoveAt(r2);
+
+            int r3 = Random.Range(0, rewards.Count);
+            var item3 = rewards[r3];
+            rewards.RemoveAt(r3);
+
+            // 传递给 UI
+            window.InitRewardItem(item1, item2, item3);
+            
         }
     }
 

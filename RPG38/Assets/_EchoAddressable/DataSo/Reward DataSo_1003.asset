@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Reward DataSo_1003
   m_EditorClassIdentifier: 
   rewardID: 1003
-  rewardName: reward 3
-  rewardDesc: reward 3
-  rewardType: 0
+  rewardName: atk+5
+  rewardDesc: atk+5
   itemID: 1003

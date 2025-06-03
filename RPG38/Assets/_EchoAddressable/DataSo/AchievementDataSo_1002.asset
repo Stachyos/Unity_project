@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: AchievementDataSo_1002
   m_EditorClassIdentifier: 
   id: 1002
-  desc: Achievement 2
-  effectDesc: MaxHealth + 10
-  buffId: 1005
+  desc: "\u201CLife is above all else.\u201D(HpMax>=150)"
+  effectDesc: Rebirth once
+  buffId: 1003

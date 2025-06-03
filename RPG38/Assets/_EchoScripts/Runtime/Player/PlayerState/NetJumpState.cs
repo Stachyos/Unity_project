@@ -22,6 +22,10 @@ namespace GameLogic.Runtime
         protected override void OnServerUpdate()
         {
             base.OnServerUpdate();
+            
+               float vx = _target.axisInput.x * _target.horMoveSpeed;
+               _target.rb2D.velocity = new Vector2(vx, _target.rb2D.velocity.y);
+               _target.HandleFlip(_target.axisInput.x);
             // 一旦向下开始，就切到 Fall
             if (_target.rb2D.velocity.y <= 0f)
                 _fsm.ChangeState(NetPlayerState.Fall);

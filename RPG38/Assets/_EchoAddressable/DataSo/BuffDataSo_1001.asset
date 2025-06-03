@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BuffDataSo_1001
   m_EditorClassIdentifier: 
   Id: 1001
-  Name: buff1
+  Name: hp/mp+20
   Duration: 0
-  TickInterval: 3
+  TickInterval: 0
   IsPersistent: 1

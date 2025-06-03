@@ -86,6 +86,12 @@ public class BuffSystem
             case 1009:
                 buff = new Buff_1009();
                 break;
+            case 1010:
+                buff = new Buff_1010();
+                break;
+            case 1011:
+                buff = new Buff_1011();
+                break;
             default:
                 throw new ArgumentNullException();
         }

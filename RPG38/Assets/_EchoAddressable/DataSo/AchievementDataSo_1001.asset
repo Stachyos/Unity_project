@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: AchievementDataSo_1001
   m_EditorClassIdentifier: 
   id: 1001
-  desc: Achievement 1
-  effectDesc: ATk+1
-  buffId: 1004
+  desc: "\u201COld soldiers never die; they just fade away.\u201D(Pass)"
+  effectDesc: HpMax-50
+  buffId: 1007

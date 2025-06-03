@@ -6,7 +6,7 @@ namespace GameLogic.Runtime
     //atk+1
     public class Buff_1004 : Buff
     {
-        private float atkModify = 1F;
+        private float atkModify = 5F;
         public override void Apply(GameObject target)
         {
             base.Apply(target);
@@ -17,8 +17,8 @@ namespace GameLogic.Runtime
 
         public override void Remove()
         {
-            var attr = Target.GetComponent<IChaAttr>();
-            attr.AddAttack(-atkModify);
+            // var attr = Target.GetComponent<IChaAttr>();
+            // attr.AddAttack(-atkModify);
         }
     }
 }

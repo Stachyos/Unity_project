@@ -6,19 +6,20 @@ namespace GameLogic.Runtime
     
     public class Buff_1009 : Buff
     {
-        private float atkModify = 2F;
+        private float hpMaxModify = 2F;
         public override void Apply(GameObject target)
         {
             base.Apply(target);
 
             var attr = target.GetComponent<IChaAttr>();
-            attr.AddAttack(atkModify);
+            hpMaxModify = (float)(attr.MaxHealth * 0.1);
+            attr.AddMaxHealth(hpMaxModify);
         }
 
         public override void Remove()
         {
-            var attr = Target.GetComponent<IChaAttr>();
-            attr.AddAttack(-atkModify);
+            // var attr = Target.GetComponent<IChaAttr>();
+            // attr.AddAttack(-hpMaxModify);
         }
     }
 }

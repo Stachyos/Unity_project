@@ -19,6 +19,7 @@ namespace GameLogic.Runtime
         protected override void OnServerUpdate()
         {
             base.OnServerUpdate();
+            _target.aniCtrl.SetBool(IdleHash, true);
 
             // —— 失地则下落 —— 
             if (!_target.IsGround)

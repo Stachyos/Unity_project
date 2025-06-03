@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: AchievementDataSo_1003
   m_EditorClassIdentifier: 
   id: 1003
-  desc: Wealth in abundance
-  effectDesc: The initial number of gold coins is 100
+  desc: "\u201Cthe richest person in the universe.\u201D(money>=1000)"
+  effectDesc: initial money +100
   buffId: 1006

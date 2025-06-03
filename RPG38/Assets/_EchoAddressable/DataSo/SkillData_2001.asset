@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SkillData_2001
   m_EditorClassIdentifier: 
   skillID: 2001
-  skillName: "\u98DE\u9556"
+  skillName: 
   hpCost: 0
   mpCost: 0
   attack: 10

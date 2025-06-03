@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BuffDataSo_1005
   m_EditorClassIdentifier: 
   Id: 1005
-  Name: "\u5927\u5B9D\u4E38"
+  Name: hpmax+10
   Duration: 0
   TickInterval: 0
   IsPersistent: 1

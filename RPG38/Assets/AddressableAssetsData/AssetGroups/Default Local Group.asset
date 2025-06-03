@@ -137,6 +137,94 @@ MonoBehaviour:
     m_Address: Assets/_EchoAddressable/DataSo/BuffDataSo_1007.asset
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 27d93339a59110241a2872454a352a5b
+    m_Address: Assets/_EchoAddressable/DataSo/BuffDataSo_1011.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c31d47b917109bd4f95364d7d48c07cb
+    m_Address: Assets/_EchoAddressable/DataSo/BuffDataSo_1010.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c9ca464bb5d5f084dba54833e1d47c12
+    m_Address: Assets/_EchoAddressable/DataSo/ItemDataSo_1004.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e3aca7d9bbc0890448b7ab31d9eb8644
+    m_Address: Assets/_EchoAddressable/DataSo/ItemDataSo_1005.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e043af791d5bb7a4a8cd243717a65666
+    m_Address: Assets/_EchoAddressable/DataSo/ItemDataSo_1006.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a41df8e56cb2ebe4886a1023bbe1e06f
+    m_Address: Assets/_EchoAddressable/DataSo/ItemDataSo_1007.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9959b4cd7c622374ebf7a99c42d1c909
+    m_Address: Assets/_EchoAddressable/DataSo/ItemDataSo_1008.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c5f5d0031346a3c41b4c4548d7480347
+    m_Address: Assets/_EchoAddressable/DataSo/Reward DataSo_1004.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c0402f0377afe074fb83a7561a4ffdf7
+    m_Address: Assets/_EchoAddressable/DataSo/Reward DataSo_1005.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 93b571b1133819d4ca674340156e3dbf
+    m_Address: Assets/_EchoAddressable/DataSo/Reward DataSo_1006.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: bde1390ad35248348ab6101d979f4bee
+    m_Address: Assets/_EchoAddressable/DataSo/Reward DataSo_1007.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: d10a446ed81a17748a0273229221bc09
+    m_Address: Assets/_EchoAddressable/DataSo/Reward DataSo_1008.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: d30001ea8efacf940aa17888ac47c8b0
+    m_Address: Assets/_EchoAddressable/DataSo/ShopItemDataSo_1003.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 1d590f89ae1d152439470864bc340e24
+    m_Address: Assets/_EchoAddressable/DataSo/ShopItemDataSo_1004.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: acba76994dfbaba49809e5d193b6e40d
+    m_Address: Assets/_EchoAddressable/DataSo/ShopItemDataSo_1007.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 8d69272ff0dcf024ca6e549fd2528a43
+    m_Address: Assets/_EchoAddressable/DataSo/ShopItemDataSo_1006.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b368362da33e90c488ff6c28f232a7f8
+    m_Address: Assets/_EchoAddressable/DataSo/ShopItemDataSo_1005.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 358ecec617973144191dc170cf0b15c2
+    m_Address: Assets/_EchoAddressable/Prefabs/Skill/Bullet_2002 Variant.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 61258bae294605c4b801ce5ce7ccf682
+    m_Address: Assets/_EchoAddressable/Prefabs/Skill/Skill_2002.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f84f07dd7ecdd8c44b12585133ef9711
+    m_Address: Assets/_EchoAddressable/DataSo/SkillData_2002.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 0a515bca8010ae145893ecd77aee4d25
+    m_Address: Assets/_EchoAddressable/Prefabs/Player2.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a7b3ac09af3bd6d44a178e71a722256f
+    m_Address: Assets/_EchoAddressable/Prefabs/Player.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: d1d217cdf5932f7408946111ba4998c7, type: 2}
   m_SchemaSet:

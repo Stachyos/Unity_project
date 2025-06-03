@@ -130,7 +130,7 @@ MonoBehaviour:
   syncInterval: 0
   gold: 0
   hp: 0
-  mp: 100
+  mp: 50
   buffId: -1
   skillId: -1
 --- !u!114 &7576793734723828346

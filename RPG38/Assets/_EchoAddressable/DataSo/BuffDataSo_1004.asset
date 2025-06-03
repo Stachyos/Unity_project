@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BuffDataSo_1004
   m_EditorClassIdentifier: 
   Id: 1004
-  Name: "\u5927\u5200"
+  Name: atk+5
   Duration: 0
   TickInterval: 0
   IsPersistent: 1

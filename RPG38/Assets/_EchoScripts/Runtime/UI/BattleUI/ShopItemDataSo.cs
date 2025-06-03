@@ -12,12 +12,14 @@ namespace GameLogic.Runtime
         public string itemName;
         public int goldCost;
         public int buffId;
+        public int demand = 0;
+        public int cost;
 
         private void OnValidate()
         {
             if (this.name != $"ShopItemDataSo_{shopItemId}")
             {
-                Debug.LogError("ShopItemDataSo name is wrong");
+                Debug.LogError("ShopItemDataSo name is wrong"+this.name);
             }
         }
     }

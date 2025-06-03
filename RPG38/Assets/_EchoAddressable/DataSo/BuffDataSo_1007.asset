@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BuffDataSo_1007
   m_EditorClassIdentifier: 
   Id: 1007
-  Name: atk
+  Name: hpmax-50
   Duration: 0
   TickInterval: 0
   IsPersistent: 1

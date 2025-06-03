@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: ShopItemDataSo_1001
   m_EditorClassIdentifier: 
   shopItemId: 1001
-  itemName: Equip1
-  goldCost: 200
+  itemName: speed+1
+  goldCost: 0
   buffId: 1002
+  demand: 0
+  cost: 120

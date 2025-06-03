@@ -42,7 +42,7 @@ namespace GameLogic.Runtime
             {
                 var attacker = this.skillCaster?.GetComponent<EchoNetPlayerCtrl>();
                 var defender = other.GetComponent<Belong>().Owner.GetComponent<IChaAttr>();
-                DamageMgr.ProcessDamage(attacker,defender,this.skillData.attack,false);
+                DamageMgr.ProcessDamage(attacker,defender,(float)(10+0.5*attacker.Attack),false);
                 DestroySelf();
             }
         }

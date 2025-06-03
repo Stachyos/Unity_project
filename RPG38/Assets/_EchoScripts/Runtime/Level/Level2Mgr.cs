@@ -44,6 +44,7 @@ namespace GameLogic.Runtime.Level
                 {
                     conn.identity.GetComponent<EchoNetPlayerCtrl>().canControl = false;
                 }
+                StringEventSystem.Global.Send(EventKey.Passed);
                 RpcWin();
             }
         }

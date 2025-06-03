@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Reward DataSo_1001
   m_EditorClassIdentifier: 
   rewardID: 1001
-  rewardName: reward 1
-  rewardDesc: reward 1
-  rewardType: 0
+  rewardName: mp/hp+20
+  rewardDesc: mp/hp+20
   itemID: 1001

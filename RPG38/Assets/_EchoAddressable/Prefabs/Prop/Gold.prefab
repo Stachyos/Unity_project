@@ -128,7 +128,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  gold: 10000
+  gold: 100
   hp: 0
   mp: 0
   buffId: -1

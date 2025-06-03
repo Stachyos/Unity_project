@@ -16,8 +16,8 @@ namespace GameLogic.Runtime
 
         public override void Remove()
         {
-            var netPlayerCtrl = Target.GetComponent<EchoNetPlayerCtrl>();
-            netPlayerCtrl.horMoveSpeed -= modifierSpeed;
+            // var netPlayerCtrl = Target.GetComponent<EchoNetPlayerCtrl>();
+            // netPlayerCtrl.horMoveSpeed -= modifierSpeed;
         }   
     }
 }

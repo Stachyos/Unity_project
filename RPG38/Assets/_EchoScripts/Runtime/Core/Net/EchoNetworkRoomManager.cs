@@ -24,6 +24,31 @@ public class EchoNetworkRoomManager : NetworkRoomManager
 {
 	public GameObject player1;
 	public GameObject player2;
+
+	public override void OnStartServer()
+	{
+		base.OnStartServer();
+
+		if (player2 == null)
+		{
+			Debug.LogError($"[{nameof(EchoNetworkRoomManager)}] 无法通过 Resources.Load 找到 {player2}");
+		}
+		else
+		{
+			// 如果 spawnPrefabs 里还没有同名的 Prefab，就加入进去
+			if (!spawnPrefabs.Contains(player2))
+			{
+				spawnPrefabs.Add(player2);
+				Debug.Log(
+					$"[{nameof(EchoNetworkRoomManager)}] 已经把 player2.prefab 加入到 spawnPrefabs 列表 (assetId={player2.GetComponent<NetworkIdentity>().assetId})");
+			}
+			else
+			{
+				Debug.Log($"[{nameof(EchoNetworkRoomManager)}] spawnPrefabs 中已经包含了 player2.prefab，跳过重复添加");
+			}
+		}
+	}
+
 	public override void OnRoomServerPlayersReady()
 	{
 		JKLog.Log("all players are ready");
@@ -39,13 +64,28 @@ public class EchoNetworkRoomManager : NetworkRoomManager
 				var netPlayer = conn.identity.GetComponent<EchoNetPlayerCtrl>();
 				netPlayer.canControl = true;
 				//将血量 蓝量回满
-				netPlayer.AddHealth(1000);
-				netPlayer.AddMp(1000);
+				netPlayer.AddHealth(20);
+				netPlayer.AddMp(20);
 				var startPosTf = GetStartPosition();
 				netPlayer.transform.position = startPosTf.position;
 				netPlayer.TargetRpcInjectShopItemData(conn);
 				netPlayer.fsm.ChangeState(NetPlayerState.Idle);
 				netPlayer.aniCtrl.SetBool("Dead",false);
+				
+				
+				// 2. 把根节点也切到 Ignore Raycast（以防万一）——不过真正命中的是 Collider2D，
+				//    但建议先改根节点，逻辑更一致
+				netPlayer.gameObject.layer = LayerMask.NameToLayer("Player");
+
+				// 3. 找出所有子物体里挂着 2D 碰撞器（Collider2D）的对象，一并把它们的 Layer 设为 Ignore Raycast
+				//    includeInactive: true 可以处理被暂时设为 inactive 的 Collider2D
+				Collider2D[] all2DColliders = netPlayer.GetComponentsInChildren<Collider2D>(true);
+				foreach (Collider2D col2D in all2DColliders)
+				{
+					col2D.gameObject.layer = LayerMask.NameToLayer("Player");
+				}
+				
+				
 				conn.identity.GetComponent<NetworkTransformUnreliable>().RpcTeleport(startPosTf.position);
 			}
 		}

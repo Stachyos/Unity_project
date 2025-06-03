@@ -3,24 +3,23 @@ using UnityEngine;
 
 namespace GameLogic.Runtime
 {
-    //每tick增加10点血量
+    
     public class Buff_1001 : Buff
     {
-        public override void Remove()
+        private float mpMaxModify = 20F;
+        public override void Apply(GameObject target)
         {
-            
+            base.Apply(target);
+
+            var attr = target.GetComponent<IChaAttr>();
+            attr.AddMp(mpMaxModify);
+            attr.AddHealth(mpMaxModify);
         }
 
-        public override void OnTick()
+        public override void Remove()
         {
-            base.OnTick();
-
-            var attr = Target.GetComponent<IChaAttr>();
-            if (attr != null)
-            {
-                attr.AddHealth(10);
-                attr.AddMp(10);
-            }
+            // var attr = Target.GetComponent<IChaAttr>();
+            // attr.AddAttack(-mpMaxModify);
         }
     }
 }

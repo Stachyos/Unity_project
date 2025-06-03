@@ -77,6 +77,18 @@ namespace GameLogic.Runtime
         public float attackRadius = 0.5f;
         public LayerMask enemyLayer;
         public float  attack1HitTime = 0.2f;  // 判定帧的时刻（秒）
+        
+        [Header("Double Jump Settings")]
+// 最大跳跃次数（落地前允许的跳跃次数，1：单跳，2：二段跳）
+        [SerializeField] private int maxJumpCount = 2;
+// 当前已跳跃次数
+        [SyncVar] private int jumpCount = 0;
+
+        [Header("Dash Cooldown Settings")]
+// 冲刺冷却时长（秒）
+        [SerializeField] private float dashCooldown = 1f;
+// 记录上次冲刺触发的时间点
+        [SyncVar] private float lastDashTime = -Mathf.Infinity;
 
         // 新增事件
         public event Action OnAttack1;
@@ -215,20 +227,21 @@ namespace GameLogic.Runtime
         }
         
         [TargetRpc]
-        private void TargetRpcRefreshUI(NetworkConnection conn,float currentHealth,float maxHealth,float currentMp,float maxMp,int goldNumber)
+        private void TargetRpcRefreshUI(NetworkConnection conn,float currentHealth,float maxHealth,float currentMp,float maxMp,int goldNumber,float attack, float speed)
         {
             var window = UISystem.GetWindow<BattleUI>();
             if(window ==null)
                 return;
             
             StringEventSystem.Global.Send(EventKey.GoldNumberChanged,this.goldNumber,goldNumber);
+            StringEventSystem.Global.Send(EventKey.HpMaxNumberChanged,this.maxHealth,maxHealth);
             
             this.currentHealth = currentHealth;
             this.maxHealth = maxHealth;
             this.currentMp = currentMp;
             this.maxMp = maxMp;
             this.goldNumber = goldNumber;
-            window.RefreshUI(currentHealth,maxHealth,currentMp,maxMp,goldNumber);
+            window.RefreshUI(currentHealth,maxHealth,currentMp,maxMp,goldNumber,attack,speed);
         }
 
         public override void OnStartClient()
@@ -295,7 +308,7 @@ namespace GameLogic.Runtime
         [Command]
         private void CmdReqUI()
         {
-            TargetRpcRefreshUI(this.connectionToClient,this.currentHealth,this.maxHealth,this.currentMp,this.maxMp,this.goldNumber);
+            TargetRpcRefreshUI(this.connectionToClient,this.currentHealth,this.maxHealth,this.currentMp,this.maxMp,this.goldNumber, Attack, horMoveSpeed);
         }
 
         //因为成就存档都保存在各自的本地，而不是在服务器上，所以只能自己去请求服务器，让服务器去进行加成
@@ -328,23 +341,44 @@ namespace GameLogic.Runtime
         private void CmdAttack1Input() => OnAttack1?.Invoke();
 
         [Command]
-        private void CmdDashInput()    => OnDash?.Invoke();
+        private void CmdDashInput()
+        {
+            float now = Time.time;
+            // 如果当前时间已经超过上次冲刺时间 + 冷却时长，则允许冲刺
+            if (now - lastDashTime >= dashCooldown)
+            {
+                lastDashTime = now;
+                OnDash?.Invoke();
+            }
+            // 否则忽略这个冲刺请求
+        }
 
         // 改为触发事件，由 SkillState 处理播放
         [Command]
         private void CmdSkillInput()   => OnSkill?.Invoke();
 
         [Command]
-        private void CmdJumpInput()    => OnJump?.Invoke();
+        private void CmdJumpInput()
+        {
+            // 服务器端进行跳跃判断
+            if (IsGround || jumpCount < maxJumpCount)
+            {
+                jumpCount++;
+                OnJump?.Invoke();
+            }
+            // 否则：忽略额外跳跃请求
+        }
 
 
         
         [Command]
-        public void CmdBuyShopItem(int id)
+        public void CmdBuyShopItem(int id, int goldCost)
         {
             var dataSo = ResSystem.LoadAsset<ShopItemDataSo>($"Assets/_EchoAddressable/DataSo/ShopItemDataSo_{id}.asset");
             this.buffSystem.AddBuff(dataSo.buffId);
-            this.AddGold(-dataSo.goldCost);
+            this.AddGold(-goldCost);
+            TargetRpcRefreshUI(this.connectionToClient,this.currentHealth,this.maxHealth,this.currentMp,this.maxMp,this.goldNumber, Attack, horMoveSpeed);
+            
         }
 
         [Command]
@@ -361,7 +395,9 @@ namespace GameLogic.Runtime
             if (itemDataSo.itemType == ItemType.Equipment)
             {
                 this.AddEquip(itemDataSo.itemID);
+                TargetRpcRefreshUI(this.connectionToClient,this.currentHealth,this.maxHealth,this.currentMp,this.maxMp,this.goldNumber, Attack, horMoveSpeed);
             }
+            
         }
 
         #endregion
@@ -370,11 +406,12 @@ namespace GameLogic.Runtime
 
         public void AddEquip(int itemId)
         {
-            if(this.equips.Contains(itemId) == false)
-                return;
+            // if(this.equips.Contains(itemId) == false)
+            //     return;
             var itemDataSo = ResSystem.LoadAsset<ItemDataSo>($"Assets/_EchoAddressable/DataSo/ItemDataSo_{itemId}.asset");
             this.equips.Add(itemId);
             this.buffSystem.AddBuff(itemDataSo.buffId);
+            TargetRpcRefreshUI(this.connectionToClient,this.currentHealth,this.maxHealth,this.currentMp,this.maxMp,this.goldNumber, Attack, horMoveSpeed);
         }
 
         public void RemoveEquip(int itemId)
@@ -409,9 +446,11 @@ namespace GameLogic.Runtime
 
         public void BeHurt(IChaAttr attacker, float damage)
         {
+            if(fsm.CurrentStateId == NetPlayerState.Die )return;
             Debug.Log($"BeHurt called: dmg={damage}, curHP={currentHealth} before, state={fsm.CurrentStateId}");
-            this.currentHealth -= damage;
-            TargetRpcRefreshUI(this.connectionToClient,this.currentHealth,this.maxHealth,this.currentMp,this.maxMp,this.goldNumber);
+            //this.currentHealth -= damage;
+            this.AddHealth(-damage);
+            TargetRpcRefreshUI(this.connectionToClient,this.currentHealth,this.maxHealth,this.currentMp,this.maxMp,this.goldNumber, Attack, horMoveSpeed);
             if (this.currentHealth <= 0)
             {
                 //持有复生buff 进行使用
@@ -419,8 +458,10 @@ namespace GameLogic.Runtime
                 {
                     this.Rebirth();
                     this.buffSystem.RemoveBuff(1003);
+                    TargetRpcRefreshUI(this.connectionToClient,this.currentHealth,this.maxHealth,this.currentMp,this.maxMp,this.goldNumber, Attack, horMoveSpeed);
                     return;
                 }
+                TargetRpcRefreshUI(this.connectionToClient,this.currentHealth,this.maxHealth,this.currentMp,this.maxMp,this.goldNumber, Attack, horMoveSpeed);
                 fsm.ChangeState(NetPlayerState.Die);
                 OnDeath?.Invoke(this);
                 return;
@@ -455,34 +496,41 @@ namespace GameLogic.Runtime
 
         private void CheckGround()
         {
+            bool wasGround = IsGround;
             IsGround = Physics2D.Raycast(this.transform.position, Vector2.down, checkGroundDistance, groundMask);
+
+            // 如果刚刚从空中落地（之前不在地面，现在是在地面）
+            if (!wasGround && IsGround)
+            {
+                jumpCount = 0; // 重置跳跃计数
+            }
         }
 
         public void AddHealth(float amount)
         {
             this.currentHealth += amount;
             this.currentHealth = Mathf.Clamp(this.currentHealth, 0, maxHealth);
-            TargetRpcRefreshUI(this.connectionToClient,this.currentHealth,this.maxHealth,this.currentMp,this.maxMp,this.goldNumber);
+            TargetRpcRefreshUI(this.connectionToClient,this.currentHealth,this.maxHealth,this.currentMp,this.maxMp,this.goldNumber, Attack, horMoveSpeed);
         }
 
         public void AddMp(float amount)
         {
             this.currentMp += amount;
             this.currentMp = Mathf.Clamp(this.currentMp, 0, maxMp);
-            TargetRpcRefreshUI(this.connectionToClient,this.currentHealth,this.maxHealth,this.currentMp,this.maxMp,this.goldNumber);
+            TargetRpcRefreshUI(this.connectionToClient,this.currentHealth,this.maxHealth,this.currentMp,this.maxMp,this.goldNumber, Attack, horMoveSpeed);
         }
 
         public void AddGold(int amount)
         {
             this.goldNumber += amount;
             this.goldNumber = Mathf.Clamp(this.goldNumber, 0, 999999);
-            TargetRpcRefreshUI(this.connectionToClient,this.currentHealth,this.maxHealth,this.currentMp,this.maxMp,this.goldNumber);
+            TargetRpcRefreshUI(this.connectionToClient,this.currentHealth,this.maxHealth,this.currentMp,this.maxMp,this.goldNumber, Attack, horMoveSpeed);
         }
 
         public void Rebirth()
         {
-            this.AddHealth(1000);
-            this.AddMp(1000);
+            this.AddHealth(10000);
+            this.AddMp(10000);
             this.canControl = true;
         }
 
@@ -511,7 +559,7 @@ namespace GameLogic.Runtime
         }
 
         public float MaxMp { get=>maxMp; set=>maxMp = value; }
-        public float attack = 5;
+        public float attack = 20;
         public float Attack { get=>attack; set=>attack=value; }
         public bool IsDead => this.currentHealth <= 0;
         public float CurrentMp {get=>currentMp; set=>currentMp = value; }

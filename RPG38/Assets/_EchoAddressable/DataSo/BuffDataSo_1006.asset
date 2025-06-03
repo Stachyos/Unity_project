@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BuffDataSo_1006
   m_EditorClassIdentifier: 
   Id: 1006
-  Name: "\u8D22\u5BCC\u4E07\u8D2F"
+  Name: money+100
   Duration: 0
   TickInterval: 0
   IsPersistent: 1

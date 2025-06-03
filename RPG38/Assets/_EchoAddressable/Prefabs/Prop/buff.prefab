@@ -131,7 +131,7 @@ MonoBehaviour:
   gold: 0
   hp: 0
   mp: 0
-  buffId: 1001
+  buffId: 1004
   skillId: 0
 --- !u!114 &340285460192255411
 MonoBehaviour:

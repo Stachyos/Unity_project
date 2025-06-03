@@ -69,13 +69,17 @@ namespace GameLogic.Runtime
         private float nextAttackTime = 0f;    // 下次允许Attack1的时间
         
         public SkillSystem SkillSystem { set; get; }
+        private FuzzyHelper fuzzyHelper;
 
 
 
         public override void OnStartServer()
         {
             base.OnStartServer();
+            fuzzyHelper = new FuzzyHelper();
             SkillSystem = new SkillSystem(gameObject);
+
+            SkillSystem.LearnSkill(skillId);
 
             patrolStartPos = transform.position;
             idleEndTime = Time.time + Random.Range(idleTimeMin, idleTimeMax);
@@ -149,12 +153,25 @@ namespace GameLogic.Runtime
                 {
                     ResetBools();
                     animator.SetBool("Attack", true);
-                    SkillSystem.PlaySkill(skillId);
+                    stateTimer = 0f;
+                    hasHit = false;
+                   
                 })
                 .OnServerUpdate(() =>
                 {
-                    // immediately return to idle after playing
-                    fsm.ChangeState(SimpleEnemyState.Idle);
+                    stateTimer += Time.deltaTime;
+                    if (!hasHit && stateTimer >= 0.1f)
+                    {
+                        hasHit = true;
+                        SkillSystem.PlaySkill(skillId);
+                    }
+                    if (stateTimer >= attackDuration)
+                    {
+                        animator.SetBool("Attack", false);
+                        // return to idle
+                        idleEndTime = Time.time + Random.Range(idleTimeMin, idleTimeMax);
+                        fsm.ChangeState(SimpleEnemyState.Idle);
+                    }
                 })
                 .OnExit(() => animator.SetBool("Attack", false));
 
@@ -205,12 +222,28 @@ private void UpdateAI()
         SetFaceTo(face);
 
         float dist = Vector2.Distance(transform.position, playerPos);
+        
+        float enemyHpPct  = currentHealth / (float)maxHealth; // 敌人自己血量比例
+        var playerAttr    = hit.collider.GetComponentInParent<IChaAttr>();
+        float playerHpPct = 0f;
+        if (playerAttr != null)
+            playerHpPct = playerAttr.CurrentHealth / (float)playerAttr.MaxHealth;
+
+        // 1.3 调用 FuzzyDecisionTool 决策
+        var decision = fuzzyHelper.Decide(enemyHpPct, playerHpPct, dist, detectDistance);
+        
 
         // —— 2️⃣ 如果要测试施法 —— 
-        if (useSkill)
+        if (decision == FuzzyHelper.ActionType.Skill)
         {
-            if (fsm.CurrentStateId != SimpleEnemyState.Skill)
-                fsm.ChangeState(SimpleEnemyState.Skill);
+            if (Time.time >= nextAttackTime)
+            {
+                // 到了近战范围并且间隔到了：发动 Attack1
+                nextAttackTime = (float)(Time.time + attackInterval * 1.3);
+                if (fsm.CurrentStateId != SimpleEnemyState.Skill)
+                    fsm.ChangeState(SimpleEnemyState.Skill);
+            }
+            
         }
         else
         {
@@ -276,7 +309,9 @@ private void UpdateAI()
 
         public override void BeHurt(IChaAttr attacker, float damage)
         {
+            if(fsm.CurrentStateId == SimpleEnemyState.Die) return;
             base.BeHurt(attacker, damage);
+            
             if (currentHealth <= 0)
             {
                 //NetworkServer.Destroy(this.gameObject);
@@ -284,6 +319,7 @@ private void UpdateAI()
             }
             else
             {
+                if(fsm.CurrentStateId == SimpleEnemyState.Hurt) return;
                 fsm.ChangeState(SimpleEnemyState.Hurt);
             }
         }

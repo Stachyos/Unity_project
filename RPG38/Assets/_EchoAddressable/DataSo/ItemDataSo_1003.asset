@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: ItemDataSo_1003
   m_EditorClassIdentifier: Assembly-CSharp:GameLogic.Runtime:ItemDataSo
   itemID: 1003
-  itemName: Item3
+  itemName: atk+5
   icon: {fileID: 0}
-  itemDesc: Item3
-  buffId: 1009
+  itemDesc: atk+5
+  buffId: 1004
   itemType: 0

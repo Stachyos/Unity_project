@@ -292,12 +292,14 @@ MonoBehaviour:
   - {fileID: 4200355239393286918, guid: 6a9ae951085714141a60e28d1218573c, type: 3}
   - {fileID: 5344898429037702036, guid: 04a113867bf4bd44db9213b0cdbf4d4c, type: 3}
   - {fileID: 7576793734723828349, guid: cf33f2b4feeb5a943a3132a3d58a5f49, type: 3}
-  - {fileID: 8327638769431947246, guid: 8db7aa9801af7244f9d312c61a440f40, type: 3}
   - {fileID: 5344898429037702036, guid: 88d15da7be2cb5149932a977ce32cf1f, type: 3}
   - {fileID: 340285460192255412, guid: 863a5f083d6a845408f71036e8baeda4, type: 3}
   - {fileID: 2137139433623230885, guid: 1037c20dbfa4f8a429daec14a3d39bc1, type: 3}
   - {fileID: 2137139433623230885, guid: d682b0e5347963e4bb9478626cf8049b, type: 3}
   - {fileID: 7069862978809914967, guid: 53384be3a6c1dde46ac5e990320a0ee8, type: 3}
+  - {fileID: 7995312536690888858, guid: 358ecec617973144191dc170cf0b15c2, type: 3}
+  - {fileID: 4029470929013603536, guid: 61258bae294605c4b801ce5ce7ccf682, type: 3}
+  - {fileID: 739992183373708181, guid: 0a515bca8010ae145893ecd77aee4d25, type: 3}
   exceptionsDisconnect: 1
   snapshotSettings:
     bufferTimeMultiplier: 2
@@ -321,7 +323,7 @@ MonoBehaviour:
   _allPlayersReady: 0
   clientIndex: 0
   player1: {fileID: 739992183373708181, guid: a7b3ac09af3bd6d44a178e71a722256f, type: 3}
-  player2: {fileID: 8327638769431947246, guid: 8db7aa9801af7244f9d312c61a440f40, type: 3}
+  player2: {fileID: 739992183373708181, guid: 0a515bca8010ae145893ecd77aee4d25, type: 3}
 --- !u!4 &1609785377
 Transform:
   m_ObjectHideFlags: 0

@@ -73,7 +73,7 @@ namespace GameLogic.Runtime
                     DamageMgr.ProcessDamage(
                         attacker: _target,
                         defender: defender,
-                        damage:  10000,
+                        damage:  _target.Attack,
                         //damage:  _target.attack,
                         forceCrit:  false
                     );

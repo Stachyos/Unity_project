@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BuffDataSo_1003
   m_EditorClassIdentifier: 
   Id: 1003
-  Name: "\u590D\u751F"
+  Name: rebirth
   Duration: 0
   TickInterval: 0
   IsPersistent: 1

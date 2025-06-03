@@ -18,14 +18,19 @@ namespace GameLogic.Runtime
         {
             buyBtn.onClick.AddListener(() =>
             {
-                if(_dataSo==null)
+                if (_dataSo == null)
                     return;
-                
-                var netPlayer = NetworkClient.connection.identity.GetComponent<EchoNetPlayerCtrl>();
-                if(netPlayer.goldNumber < _dataSo.goldCost)
+
+                // 换成：
+                var netPlayer = NetworkClient.localPlayer?.GetComponent<EchoNetPlayerCtrl>();
+                if (netPlayer == null || !netPlayer.isLocalPlayer)
                     return;
-                
-                netPlayer.CmdBuyShopItem(_dataSo.shopItemId);
+
+                if (netPlayer.goldNumber < _dataSo.goldCost)
+                    return;
+
+                netPlayer.CmdBuyShopItem(_dataSo.shopItemId, _dataSo.goldCost);
+                _dataSo.demand++;
                 buyBtn.interactable = false;
 
                 var battleUI = UISystem.GetWindow<BattleUI>();

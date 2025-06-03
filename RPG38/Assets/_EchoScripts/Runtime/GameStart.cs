@@ -9,6 +9,7 @@ namespace GameLogic.Runtime
     {
         private void Start()
         {
+            Application.targetFrameRate = 60;
             SceneManager.LoadScene("_EchoAddressable/Scenes/RoomOffline");
         }
     }
