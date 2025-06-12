@@ -7,8 +7,6 @@
 /[Ll]ibrary/
 /[Tt]emp/
 /[Oo]bj/
-/[Bb]uild/
-/[Bb]uilds/
 /[Ll]ogs/
 /[Uu]ser[Ss]ettings/
 /*.log     
@@ -18,8 +16,6 @@
 /*/[Ll]ibrary/
 /*/[Tt]emp/
 /*/[Oo]bj/
-/*/[Bb]uild/
-/*/[Bb]uilds/
 /*/[Ll]ogs/
 /*/[Uu]ser[Ss]ettings/
 /*/*.log    
