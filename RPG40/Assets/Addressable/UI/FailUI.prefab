@@ -377,7 +377,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3883240610215609037, guid: d92aa395410e7ae4b9d63eb77097ae40, type: 3}
       propertyPath: m_text
-      value: Continue
+      value: Exit Game
       objectReference: {fileID: 0}
     - target: {fileID: 3883240610215609037, guid: d92aa395410e7ae4b9d63eb77097ae40, type: 3}
       propertyPath: m_fontAsset

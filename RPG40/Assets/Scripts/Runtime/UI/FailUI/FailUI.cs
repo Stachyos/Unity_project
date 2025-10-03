@@ -2,6 +2,7 @@
 using JKFrame;
 using Mirror;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -22,15 +23,27 @@ namespace GameLogic.Runtime
         {
             base.Init();
             
+            quitBtn.onClick.RemoveAllListeners();
             quitBtn.onClick.AddListener(() =>
             {
-                if (NetworkServer.active && NetworkClient.isConnected)
-                    NetworkManager.singleton.StopHost();
-                else if (NetworkClient.isConnected)
-                    NetworkManager.singleton.StopClient();
-                
-                UISystem.CloseAllWindow();
+#if UNITY_EDITOR
+                // 在编辑器里退出 Play 模式
+                EditorApplication.isPlaying = false;
+#else
+        // 打包后的程序直接退出
+        Application.Quit();
+#endif
             });
+            
+            // quitBtn.onClick.AddListener(() =>
+            // {
+            //     if (NetworkServer.active && NetworkClient.isConnected)
+            //         NetworkManager.singleton.StopHost();
+            //     else if (NetworkClient.isConnected)
+            //         NetworkManager.singleton.StopClient();
+            //     
+            //     UISystem.CloseAllWindow();
+            // });
             
             var achievementData = GameHub.Interface.GetModel<CacheModel>().GetAchievement();
             List<AchievementCellData> achievementCellDatas = new List<AchievementCellData>();
@@ -43,5 +56,7 @@ namespace GameLogic.Runtime
             scrollDelegate.AddCellRange(achievementCellDatas);
             scrollDelegate.ReloadData();
         }
+        
+        
     }
 }

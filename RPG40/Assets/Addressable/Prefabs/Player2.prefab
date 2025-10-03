@@ -341,8 +341,8 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 8
-  jumpForce: 16
-  horMoveSpeed: 4
+  jumpForce: 20
+  horMoveSpeed: 6
   canControl: 1
   axisInput: {x: 0, y: 0}
   maxHealth: 100
@@ -356,7 +356,7 @@ MonoBehaviour:
   skillCasterPoints:
   - {fileID: 5448005569630616235}
   equips: 
-  dashSpeed: 14
+  dashSpeed: 18
   dashDuration: 0.3
   attack1Duration: 0.6
   hurtDuration: 0.4
@@ -370,6 +370,7 @@ MonoBehaviour:
   maxJumpCount: 2
   dashCooldown: 1
   facingRight: 1
+  _hasDied: 0
   attack: 10
 --- !u!1 &1467914311927825041
 GameObject:

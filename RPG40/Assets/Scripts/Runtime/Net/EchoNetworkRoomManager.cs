@@ -11,6 +11,9 @@ using Mirror;
 
 public class EchoNetworkRoomManager : NetworkRoomManager
 {
+	[Header("Room Start Options")]
+	[Tooltip("If true, the room can start the game when at least one player is ready. If false, uses minPlayers logic.")]
+	public bool allowSinglePlayerStart = true;
 	public GameObject player1;
 	public GameObject player2;
 
@@ -50,6 +53,15 @@ public class EchoNetworkRoomManager : NetworkRoomManager
 				//Restore health and mp to full.
 				netPlayer.AddHealth(20);
 				netPlayer.AddMp(20);
+				if (NetworkServer.connections.Values.Count == 1)
+				{
+					netPlayer.AddMaxHealth(20);
+					netPlayer.AddHealth(20);
+					netPlayer.AddMaxMp(20);
+					netPlayer.AddMp(20);
+					
+				}
+
 				var startPosTf = GetStartPosition();
 				netPlayer.transform.position = startPosTf.position;
 				netPlayer.TargetRpcInjectShopItemData(conn);
@@ -132,8 +144,45 @@ public class EchoNetworkRoomManager : NetworkRoomManager
 
 	public override void ReadyStatusChanged()
 	{
-		base.ReadyStatusChanged();
-		RefreshRoomUINotify();
+		// 当允许单人启动时：只要有至少一个 ready 的玩家就开始（触发 OnRoomServerPlayersReady）
+		if (allowSinglePlayerStart)
+		{
+			int CurrentPlayers = 0;
+			int ReadyPlayers = 0;
+
+			foreach (NetworkRoomPlayer item in roomSlots)
+			{
+				if (item != null)
+				{
+					CurrentPlayers++;
+					if (item.readyToBegin)
+						ReadyPlayers++;
+				}
+			}
+
+			// 如果至少 1 人 ready，就认为 allPlayersReady，并触发后续逻辑
+			if (ReadyPlayers >= 1 && CurrentPlayers >= 1)
+			{
+				// 清理 pending（保持与原有行为一致）
+				pendingPlayers.Clear();
+
+				// 通过设置 allPlayersReady 触发 OnRoomServerPlayersReady() 回调
+				allPlayersReady = true;
+			}
+			else
+			{
+				allPlayersReady = false;
+			}
+
+			// 刷新 UI（保留你原来的 UI 刷新调用）
+			RefreshRoomUINotify();
+		}
+		else
+		{
+			// 保留原有默认逻辑（基于 minPlayers）
+			base.ReadyStatusChanged();
+			RefreshRoomUINotify();
+		}
 	}
 
 	public override void OnStopClient()

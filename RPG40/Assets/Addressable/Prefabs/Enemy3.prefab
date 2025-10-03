@@ -451,7 +451,7 @@ MonoBehaviour:
   syncInterval: 0
   maxHealth: 50
   currentHealth: 50
-  attack: 20
+  attack: 25
   faceTo: 0
   view: {fileID: 1844097973741747104}
   leftCheckPoint: {fileID: 7268420565562122010}
